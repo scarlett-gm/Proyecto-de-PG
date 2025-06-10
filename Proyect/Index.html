@@ -2,21 +2,83 @@
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
-    <title>SIMULLATOR</title>
+    <title>Dental Morphology Simulator</title>
+
+   
     <link rel="stylesheet" href="style.css" />
-    <script src="main.js"></script>
   </head>
+
   <body>
+   
     <header>
       <img src="Recursos/logo.png" alt="Logo" id="logo" />
-      <h1>Dental Morphology Simulator in Webgl</h1>
+
+      <h1>Dental Morphology Simulator in WebGL</h1>
+
+      <!-- ▸ UTILIDADES: Audio + idioma + manual -->
+      <div class="utilidades">
+         <a href="dentalcare.html" id="careBtn" class="util-btn" title="+ Info">🦷</a>
+        <button id="audioBtn" class="util-btn" title="Play / Pause audio">🔊</button>
+        <button id="langBtn" class="util-btn" title="Cambiar a español">🇪🇸</button>
+        <a href="Recursos/manual.pdf" target="_blank" id="manualBtn" class="util-btn" title="Ver manual de usuario">📘</a>
+      </div>
     </header>
 
+   
     <main>
       <div class="botones">
-        <a href="Adult.html" class="boton">Adult Dental Morphology</a>
+        <a href="Escena.html" class="boton">Adult Dental Morphology</a>
         <a href="Child.html" class="boton">Pediatric Dental Morphology</a>
       </div>
     </main>
+
+    
+    <audio id="bgAudio" src="Recursos/espera.mp3" loop></audio>
+
+    
+    <script>
+      /* --- Audio --- */
+      const audio = document.getElementById("bgAudio");
+      const audioBtn = document.getElementById("audioBtn");
+      let playing = false;
+
+      audioBtn.addEventListener("click", () => {
+        if (!playing) {
+          audio.play();
+          audioBtn.textContent = "🔊"; 
+        } else {
+          audio.pause();
+          audioBtn.textContent = "🔈"; 
+        }
+        playing = !playing;
+      });
+
+      /* --- Cambio de idioma --- */
+      const langBtn = document.getElementById("langBtn");
+      const title = document.querySelector("h1");
+      const btnAdult = document.getElementById("btnAdult");
+      const btnPediatric = document.getElementById("btnPediatric");
+      const manualBtn = document.getElementById("manualBtn");
+      let isSpanish = false;
+
+      langBtn.addEventListener("click", () => {
+        if (!isSpanish) {
+          title.textContent = "Simulador de Morfología Dental en WebGL";
+          btnAdult.textContent = "Morfología Dental Adulta";
+          btnPediatric.textContent = "Morfología Dental Pediátrica";
+          manualBtn.title = "Ver manual de usuario";
+          langBtn.textContent = "🇺🇸";
+          langBtn.title = "Switch to English";
+        } else {
+          title.textContent = "Dental Morphology Simulator in WebGL";
+          btnAdult.textContent = "Adult Dental Morphology";
+          btnPediatric.textContent = "Pediatric Dental Morphology";
+          manualBtn.title = "View user manual";
+          langBtn.textContent = "🇪🇸";
+          langBtn.title = "Cambiar a español";
+        }
+        isSpanish = !isSpanish;
+      });
+    </script>
   </body>
 </html>
